@@ -1,0 +1,16 @@
+speed-threshold: 60
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: speedcam
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties.spring:
+        deserializer:
+          key.delegate.class: org.apache.kafka.common.serialization.LongDeserializer
+          value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        json:
+          trusted.packages: io.github.petriankin.speedcam
+          value.default.type: io.github.petriankin.speedcam.dto.CameraDataDto
