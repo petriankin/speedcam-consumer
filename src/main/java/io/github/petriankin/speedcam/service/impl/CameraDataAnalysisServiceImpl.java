@@ -2,8 +2,8 @@ package io.github.petriankin.speedcam.service.impl;
 
 import io.github.petriankin.speedcam.domain.CameraData;
 import io.github.petriankin.speedcam.dto.CameraDataDto;
-import io.github.petriankin.speedcam.repository.CameraDataRepository;
 import io.github.petriankin.speedcam.service.CameraDataAnalysisService;
+import io.github.petriankin.speedcam.service.CameraDataCRUDService;
 import io.github.petriankin.speedcam.service.mapping.CameraDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CameraDataAnalysisServiceImpl implements CameraDataAnalysisService {
 
     private final CameraDataMapper mapper;
-    private final CameraDataRepository repository;
+    private final CameraDataCRUDService cameraDataCRUDService;
 
     @Value("${speed-threshold:60}")
     private Integer speedThreshold;
@@ -28,7 +28,7 @@ public class CameraDataAnalysisServiceImpl implements CameraDataAnalysisService 
         if (dto.getSpeed() > speedThreshold) {
             log.info("Speed of car with license plate {} is bigger than {}", dto.getLicensePlate(), speedThreshold);
             CameraData cameraData = mapper.toEntity(dto);
-            repository.save(cameraData);
+            cameraDataCRUDService.save(cameraData);
         }
     }
 }
