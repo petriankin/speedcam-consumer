@@ -1,5 +1,8 @@
 speed-threshold: 60
 
+kafka:
+  topic: speedcam
+
 spring:
   kafka:
     bootstrap-servers: localhost:9092

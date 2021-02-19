@@ -16,7 +16,7 @@ public class SpeedCameraDataConsumerServiceImpl implements SpeedCameraDataConsum
     private final CameraDataAnalysisService dataAnalysisService;
 
     @Override
-    @KafkaListener(topics = {"speedcam"})
+    @KafkaListener(topics = {"${kafka.topic}"})
     public void consume(CameraDataDto dto) {
         log.info("consumed {}", dto);
         dataAnalysisService.checkAndSave(dto);
