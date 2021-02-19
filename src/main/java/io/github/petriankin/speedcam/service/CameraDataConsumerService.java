@@ -5,5 +5,5 @@ import io.github.petriankin.speedcam.dto.CameraDataDto;
 
 public interface CameraDataConsumerService {
 
-    void consume(CameraDataDto dto);
+    CameraDataDto consumeAndProcess(CameraDataDto dto);
 }

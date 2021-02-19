@@ -17,8 +17,9 @@ public class CameraDataConsumerServiceImpl implements CameraDataConsumerService 
 
     @Override
     @KafkaListener(topics = {"${kafka.topic}"})
-    public void consume(CameraDataDto dto) {
+    public CameraDataDto consumeAndProcess(CameraDataDto dto) {
         log.info("consumed {}", dto);
         dataAnalysisService.checkAndSave(dto);
+        return dto;
     }
 }
